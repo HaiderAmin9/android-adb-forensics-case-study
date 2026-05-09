@@ -1,0 +1,15 @@
+ADB Command History (Forensic Acquisition Log)
+# 1. Verify ADB installation
+adb --version
+# 2. Check connected devices
+adb devices
+# 3. Full logical backup of Android device
+adb backup -apk -shared -all -f backup.ab
+# 4. Extract internal storage (/sdcard) from device
+adb pull /sdcard C:\sdcard
+# 5. Convert Android backup file to TAR format
+java -jar abe-all.jar unpack backup.ab backup.tar
+# 6. Generate SHA-256 hash for backup.ab (Windows integrity check)
+certutil -hashfile backup.ab SHA256
+# 7. Generate SHA-256 hash for backup.tar (Windows integrity check)
+certutil -hashfile backup.tar SHA256
